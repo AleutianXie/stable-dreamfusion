@@ -62,10 +62,10 @@ RUN pip install pydantic[dotenv]
 # install oss python sdk
 RUN pip install oss2
 
-# copy resource
-COPY ape/.env_prod /app/stable-dreamfusion/ape/.env_prod
-COPY ape/.env_test /app/stable-dreamfusion/ape/.env_test
-COPY ape/.env_dev /app/stable-dreamfusion/ape/.env_dev
+# copy resource uplate later to k8s config
+COPY .env_prod /app/stable-dreamfusion/ape/.env_prod
+COPY .env_test /app/stable-dreamfusion/ape/.env_test
+COPY .env_dev /app/stable-dreamfusion/ape/.env_dev
 
 # Set the default command to python3
 #CMD ["python3"]
