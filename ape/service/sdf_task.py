@@ -71,7 +71,7 @@ def upload_model():
             print("upload jpg file succeed.")
 
         # upload log
-        log_path = os.path.join(current_path, "error.log")
+        log_path = os.path.join(os.path.dirname(os.path.dirname(current_path)), "error.log")
         if os.access(log_path, os.F_OK):
             oss_log_path = os.path.join(log_oss_path, "error.log")
             bucket.put_object_from_file(oss_log_path, log_path)
