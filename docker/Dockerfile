@@ -50,7 +50,7 @@ RUN pip3 install git+https://github.com/openai/CLIP.git
 # RUN bash scripts/install_ext.sh
 
 
-
+RUN python3 /app/stable-dreamfusion/main.py --text "a hamburger" --workspace k8s -O --iters 4800 --save_mesh
 
 
 # Set the default command to python3
