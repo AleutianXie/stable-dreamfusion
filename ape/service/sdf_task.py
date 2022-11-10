@@ -36,7 +36,7 @@ def upload_model():
         current_path = os.path.dirname(os.path.abspath(__file__))
         bucket = oss.get_bucket()
         target_bucket = oss.get_bucket(settings.oss_target_bucket_name)
-        out_path = os.path.join(os.path.dirname(os.path.dirname(current_path)), "ape/mesh")
+        out_path = os.path.join(os.path.dirname(os.path.dirname(current_path)), "output/mesh")
 
         # upload mtl
         mtl_path = os.path.join(out_path, "mesh.mtl")
