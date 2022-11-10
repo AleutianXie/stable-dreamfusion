@@ -52,6 +52,20 @@ RUN pip3 install git+https://github.com/openai/CLIP.git
 
 RUN python3 /app/stable-dreamfusion/main.py --text "a hamburger" --workspace k8s -O --iters 4800 --save_mesh
 
+# 临时解次打docker包后代码有更情况(不清缓存的时候)
+RUN git pull
+# python model
+RUN pip install PyMySQL
+RUN pip install PyMySQL[rsa]
+RUN pip install pydantic
+RUN pip install pydantic[dotenv]
+# install oss python sdk
+RUN pip install oss2
+
+# copy resource
+COPY ape/.env_prod /app/stable-dreamfusion/ape/.env_prod
+COPY ape/.env_test /app/stable-dreamfusion/ape/.env_test
+COPY ape/.env_dev /app/stable-dreamfusion/ape/.env_dev
 
 # Set the default command to python3
 #CMD ["python3"]
