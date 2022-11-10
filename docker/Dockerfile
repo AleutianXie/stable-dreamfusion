@@ -53,7 +53,7 @@ RUN pip3 install git+https://github.com/openai/CLIP.git
 RUN python3 /app/stable-dreamfusion/main.py --text "a hamburger" --workspace k8s -O --iters 4800 --save_mesh
 
 # 临时解次打docker包后代码有更情况(不清缓存的时候)
-RUN git pull
+# RUN git pull
 # python model
 RUN pip install PyMySQL
 RUN pip install PyMySQL[rsa]

@@ -23,7 +23,7 @@ def complete(tid: int, model_files: str):
             connection.commit()
 
 def upload_model():
-    tid = os.getenv("TASK_ID", "0")
+    tid = int(os.getenv("TASK_ID", 0))
     run_mode = os.getenv("RUN_MODE", "dev")
 
     if tid > 0:
