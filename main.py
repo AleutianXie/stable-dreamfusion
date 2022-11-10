@@ -163,4 +163,5 @@ if __name__ == '__main__':
             if opt.save_mesh:
                 trainer.save_mesh(resolution=256)
                 print("start upload sdf model files...")
+                ape.service.sdf_task.progress(9800)
                 ape.service.sdf_task.upload_model()

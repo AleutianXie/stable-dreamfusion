@@ -5,13 +5,15 @@ import os
 from ape.lib import mysql, setting, oss
 
 
-def progress(tid: int, percent: int):
-    with mysql.get_db_conn() as connection:
-        with connection.cursor() as cursor:
-            sql = f"UPDATE `sdf_task` SET `progress` = %s, " \
-                  f"`updated_at` = REPLACE(unix_timestamp(current_timestamp(3)),'.','') WHERE `id` = %s "
-            cursor.execute(sql, (percent, tid,))
-            connection.commit()
+def progress(percent: int):
+    tid = int(os.getenv("TASK_ID", 0))
+    if tid > 0:
+        with mysql.get_db_conn() as connection:
+            with connection.cursor() as cursor:
+                sql = f"UPDATE `sdf_task` SET `progress` = %s, " \
+                      f"`updated_at` = REPLACE(unix_timestamp(current_timestamp(3)),'.','') WHERE `id` = %s "
+                cursor.execute(sql, (percent, tid,))
+                connection.commit()
 
 
 def complete(tid: int, model_files: str):

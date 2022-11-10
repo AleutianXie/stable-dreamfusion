@@ -29,6 +29,9 @@ from torch_ema import ExponentialMovingAverage
 
 from packaging import version as pver
 
+import ape.service.sdf_task
+
+
 def custom_meshgrid(*args):
     # ref: https://pytorch.org/docs/stable/generated/torch.meshgrid.html?highlight=meshgrid#torch.meshgrid
     if pver.parse(torch.__version__) < pver.parse('1.10'):
@@ -479,7 +482,7 @@ class Trainer(object):
             self.writer = tensorboardX.SummaryWriter(os.path.join(self.workspace, "run", self.name))
 
         start_t = time.time()
-        
+        ape.service.sdf_task.progress(500)
         for epoch in range(self.epoch + 1, max_epochs + 1):
             self.epoch = epoch
 
@@ -491,7 +494,8 @@ class Trainer(object):
             if self.epoch % self.eval_interval == 0:
                 self.evaluate_one_epoch(valid_loader)
                 self.save_checkpoint(full=False, best=True)
-
+            p = 500 + int(float(epoch) / max_epochs * 9000)
+            ape.service.sdf_task.progress(p)
         end_t = time.time()
 
         self.log(f"[INFO] training takes {(end_t - start_t)/ 60:.4f} minutes.")
