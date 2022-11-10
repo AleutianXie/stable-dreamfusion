@@ -41,16 +41,16 @@ def upload_model():
 
         # upload mtl
         mtl_path = os.path.join(out_path, "mesh.mtl")
+        oss_mtl_path = os.path.join(model_oss_path, "mesh.mtl")
         if os.access(mtl_path, os.F_OK):
-            oss_mtl_path = os.path.join(model_oss_path, "mesh.mtl")
             bucket.put_object_from_file(oss_mtl_path, mtl_path)
             target_bucket.put_object_from_file(oss_mtl_path, mtl_path)
             print("upload mtl file succeed.")
 
         # upload obj
         obj_path = os.path.join(out_path, "mesh.obj")
+        oss_obj_path = os.path.join(model_oss_path, "mesh.obj")
         if os.access(obj_path, os.F_OK):
-            oss_obj_path = os.path.join(model_oss_path, "mesh.obj")
             bucket.put_object_from_file(oss_obj_path, obj_path)
             target_bucket.put_object_from_file(oss_obj_path, obj_path)
             print("upload obj file succeed.")
@@ -65,16 +65,16 @@ def upload_model():
 
         # upload jpg
         jpg_path = os.path.join(out_path, "albedo.jpg")
+        oss_jpg_path = os.path.join(model_oss_path, "albedo.jpg")
         if os.access(jpg_path, os.F_OK):
-            oss_jpg_path = os.path.join(model_oss_path, "albedo.jpg")
             bucket.put_object_from_file(oss_jpg_path, jpg_path)
             target_bucket.put_object_from_file(oss_jpg_path, jpg_path)
             print("upload jpg file succeed.")
 
         # upload log
         log_path = os.path.join(os.path.dirname(os.path.dirname(current_path)), "error.log")
+        oss_log_path = os.path.join(log_oss_path, "error.log")
         if os.access(log_path, os.F_OK):
-            oss_log_path = os.path.join(log_oss_path, "error.log")
             bucket.put_object_from_file(oss_log_path, log_path)
             target_bucket.put_object_from_file(oss_log_path, log_path)
             print("upload error log file succeed.")
