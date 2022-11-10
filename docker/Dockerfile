@@ -49,12 +49,6 @@ RUN pip3 install git+https://github.com/NVlabs/nvdiffrast/
 RUN pip3 install git+https://github.com/openai/CLIP.git
 # RUN bash scripts/install_ext.sh
 
-
-# RUN python3 /app/stable-dreamfusion/main.py --text "a hamburger" --workspace k8s -O --iters 4800 --save_mesh
-RUN python3 /app/stable-dreamfusion/main.py --text "a hamburger" --workspace k8s -O --iters 4800
-
-# 临时解次打docker包后代码有更情况(不清缓存的时候)
-# RUN git pull
 # python model
 RUN pip install PyMySQL
 RUN pip install PyMySQL[rsa]
@@ -62,6 +56,9 @@ RUN pip install pydantic
 RUN pip install pydantic[dotenv]
 # install oss python sdk
 RUN pip install oss2
+
+# RUN python3 /app/stable-dreamfusion/main.py --text "a hamburger" --workspace k8s -O --iters 4800 --save_mesh
+RUN python3 /app/stable-dreamfusion/main.py --text "a hamburger" --workspace k8s -O --iters 4800
 
 # copy resource uplate later to k8s config
 COPY .env_prod /app/stable-dreamfusion/ape/.env_prod
