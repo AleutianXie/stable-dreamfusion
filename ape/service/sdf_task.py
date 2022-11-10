@@ -25,6 +25,7 @@ def complete(tid: int, model_files: str):
 def upload_model():
     tid = int(os.getenv("TASK_ID", 0))
     run_mode = os.getenv("RUN_MODE", "dev")
+    print(tid, run_mode)
 
     if tid > 0:
         model_oss_path_prefix = f'Download_data/sdf/model/{run_mode}'
