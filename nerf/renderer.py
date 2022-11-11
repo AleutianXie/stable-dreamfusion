@@ -262,8 +262,8 @@ class NeRFRenderer(nn.Module):
                 # alphas = cv2.resize(alphas, (w0, h0), interpolation=cv2.INTER_NEAREST)
                 feats = cv2.resize(feats, (w0, h0), interpolation=cv2.INTER_LINEAR)
 
-            # cv2.imwrite(os.path.join(path, f'alpha.png'), alphas)
-            cv2.imwrite(os.path.join(path, f'{name}albedo.png'), feats)
+            # cv2.imwrite(os.path.join(path, f'alpha.jpg'), alphas)
+            cv2.imwrite(os.path.join(path, f'{name}albedo.jpg'), feats)
 
             # save obj (v, vt, f /)
             obj_file = os.path.join(path, f'{name}mesh.obj')
@@ -291,10 +291,10 @@ class NeRFRenderer(nn.Module):
                 fp.write(f'Ka 1.000000 1.000000 1.000000 \n')
                 fp.write(f'Kd 1.000000 1.000000 1.000000 \n')
                 fp.write(f'Ks 0.000000 0.000000 0.000000 \n')
-                fp.write(f'Tr 1.000000 \n')
+                fp.write(f'Tr 0.000000 \n')
                 fp.write(f'illum 1 \n')
                 fp.write(f'Ns 0.000000 \n')
-                fp.write(f'map_Kd {name}albedo.png \n')
+                fp.write(f'map_Kd {name}albedo.jpg \n')
 
         _export(v, f)
 
