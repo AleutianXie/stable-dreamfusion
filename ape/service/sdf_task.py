@@ -66,8 +66,8 @@ def upload_model():
         #     print("upload ply file succeed.")
 
         # upload jpg
-        jpg_path = os.path.join(out_path, "albedo.png")
-        oss_jpg_path = os.path.join(model_oss_path, "albedo.png")
+        jpg_path = os.path.join(out_path, "albedo.jpg")
+        oss_jpg_path = os.path.join(model_oss_path, "albedo.jpg")
         if os.access(jpg_path, os.F_OK):
             bucket.put_object_from_file(oss_jpg_path, jpg_path)
             target_bucket.put_object_from_file(oss_jpg_path, jpg_path)
