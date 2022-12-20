@@ -24,6 +24,7 @@ def complete(tid: int, model_files: str):
             cursor.execute(sql, (model_files, tid,))
             connection.commit()
 
+
 def upload_model():
     tid = int(os.getenv("TASK_ID", 0))
     run_mode = os.getenv("RUN_MODE", "dev")
