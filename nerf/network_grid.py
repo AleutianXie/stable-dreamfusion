@@ -57,7 +57,7 @@ class NeRFNetwork(NeRFRenderer):
             
             # use a very simple network to avoid it learning the prompt...
             # self.encoder_bg, self.in_dim_bg = get_encoder('tiledgrid', input_dim=2, num_levels=4, desired_resolution=2048)
-            self.encoder_bg, self.in_dim_bg = get_encoder('frequency', input_dim=3)
+            self.encoder_bg, self.in_dim_bg = get_encoder('frequency', input_dim=3, multires=4)
 
             self.bg_net = MLP(self.in_dim_bg, 3, hidden_dim_bg, num_layers_bg, bias=True)
             
@@ -69,7 +69,7 @@ class NeRFNetwork(NeRFRenderer):
         # x: [B, N, 3]
         
         d = (x ** 2).sum(-1)
-        g = 5 * torch.exp(-d / (2 * 0.2 ** 2))
+        g = self.opt.blob_density * torch.exp(- d / (self.opt.blob_radius ** 2))
 
         return g
 
@@ -109,7 +109,7 @@ class NeRFNetwork(NeRFRenderer):
 
         normal = self.finite_difference_normal(x)
         normal = safe_normalize(normal)
-        normal[torch.isnan(normal)] = 0
+        normal = torch.nan_to_num(normal)
 
         return normal
 
@@ -175,7 +175,7 @@ class NeRFNetwork(NeRFRenderer):
         ]        
 
         if self.bg_radius > 0:
-            params.append({'params': self.encoder_bg.parameters(), 'lr': lr * 10})
+            # params.append({'params': self.encoder_bg.parameters(), 'lr': lr * 10})
             params.append({'params': self.bg_net.parameters(), 'lr': lr})
 
         return params
